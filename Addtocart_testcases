@@ -1,0 +1,20 @@
+## 🛒 **3. Website with Add to Cart**
+
+### ✅ Positive Test Cases
+
+| Test Case Type | Scenario        | Test Case ID  | Title                    | Step ID | Step Action                    | Expected Result                      |
+| -------------- | --------------- | ------------- | ------------------------ | ------- | ------------------------------ | ------------------------------------ |
+| Functional     | Add Product     | TC\_CART\_001 | Add product to cart      | STP\_01 | Click “Add to Cart” on product | Confirmation shown, item in cart     |
+| Functional     | Change Quantity | TC\_CART\_002 | Update quantity in cart  | STP\_01 | Set quantity to 3              | Quantity updated, total recalculated |
+| Functional     | Remove Item     | TC\_CART\_003 | Remove product from cart | STP\_01 | Click “Remove”                 | Product is removed                   |
+
+### ❌ Negative Test Cases
+
+| Test Case Type | Scenario          | Test Case ID  | Title                        | Step ID | Step Action                               | Expected Result                |
+| -------------- | ----------------- | ------------- | ---------------------------- | ------- | ----------------------------------------- | ------------------------------ |
+| Negative       | Negative Quantity | TC\_CART\_004 | Enter -1 as quantity         | STP\_01 | Set quantity to -1                        | Error: “Invalid quantity”      |
+| Negative       | Remove From Empty | TC\_CART\_005 | Try removing with empty cart | STP\_01 | Open empty cart and click remove          | No action or disabled button   |
+| Negative       | Add Without Login | TC\_CART\_006 | Add item without login       | STP\_01 | Click Add to Cart without being logged in | Prompt to log in or guest cart |
+
+---
+
