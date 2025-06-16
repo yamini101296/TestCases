@@ -1,0 +1,100 @@
+Great! Below are the **Positive and Negative Test Suites**, organized **separately by scenario** and following the same format:
+
+---
+
+## 🔐 **1. Login Page**
+
+### ✅ Positive Test Cases
+
+| Test Case Type | Scenario         | Test Case ID | Title                            | Step ID | Step Action                                 | Expected Result                       |
+| -------------- | ---------------- | ------------ | -------------------------------- | ------- | ------------------------------------------- | ------------------------------------- |
+| Functional     | Valid Login      | TC\_LG\_001  | Login with valid credentials     | STP\_01 | Enter valid username & password             | User is redirected to dashboard       |
+| Functional     | Remember Me      | TC\_LG\_002  | Login with "Remember Me" checked | STP\_01 | Enter valid credentials & check Remember Me | Next login auto-fills username        |
+| Functional     | Password Masking | TC\_LG\_003  | Verify password is hidden        | STP\_01 | Type password                               | Password appears as dots or asterisks |
+
+### ❌ Negative Test Cases
+
+| Test Case Type | Scenario      | Test Case ID | Title                       | Step ID | Step Action               | Expected Result                         |
+| -------------- | ------------- | ------------ | --------------------------- | ------- | ------------------------- | --------------------------------------- |
+| Negative       | Empty Fields  | TC\_LG\_004  | Submit empty login form     | STP\_01 | Click login without input | Error: “Username and password required” |
+| Negative       | Invalid Login | TC\_LG\_005  | Incorrect username/password | STP\_01 | Enter wrong credentials   | Error: “Invalid login details”          |
+| Negative       | SQL Injection | TC\_LG\_006  | SQL injection test          | STP\_01 | Enter `' OR 1=1 --`       | Input sanitized / error shown           |
+
+---
+
+## 🎧 **2. Headphones (Product Testing)**
+
+### ✅ Positive Test Cases
+
+| Test Case Type | Scenario          | Test Case ID | Title                | Step ID | Step Action                        | Expected Result             |
+| -------------- | ----------------- | ------------ | -------------------- | ------- | ---------------------------------- | --------------------------- |
+| Functional     | Volume Control    | TC\_HP\_001  | Volume up works      | STP\_01 | Press volume up                    | Audio gets louder           |
+| Functional     | Bluetooth Pairing | TC\_HP\_002  | Pair with smartphone | STP\_01 | Turn on Bluetooth, select device   | Connection successful       |
+| Functional     | Battery Alert     | TC\_HP\_003  | Battery low alert    | STP\_01 | Use headphones till battery is low | Low battery warning appears |
+
+### ❌ Negative Test Cases
+
+| Test Case Type | Scenario        | Test Case ID | Title                      | Step ID | Step Action                 | Expected Result                      |
+| -------------- | --------------- | ------------ | -------------------------- | ------- | --------------------------- | ------------------------------------ |
+| Negative       | No Bluetooth    | TC\_HP\_004  | Try to connect with BT off | STP\_01 | Keep BT off and try to pair | “No device found” shown              |
+| Negative       | Invalid Charger | TC\_HP\_005  | Plug in wrong charger      | STP\_01 | Insert incompatible charger | Device doesn’t charge or error shown |
+
+---
+
+## 🛒 **3. Website with Add to Cart**
+
+### ✅ Positive Test Cases
+
+| Test Case Type | Scenario        | Test Case ID  | Title                    | Step ID | Step Action                    | Expected Result                      |
+| -------------- | --------------- | ------------- | ------------------------ | ------- | ------------------------------ | ------------------------------------ |
+| Functional     | Add Product     | TC\_CART\_001 | Add product to cart      | STP\_01 | Click “Add to Cart” on product | Confirmation shown, item in cart     |
+| Functional     | Change Quantity | TC\_CART\_002 | Update quantity in cart  | STP\_01 | Set quantity to 3              | Quantity updated, total recalculated |
+| Functional     | Remove Item     | TC\_CART\_003 | Remove product from cart | STP\_01 | Click “Remove”                 | Product is removed                   |
+
+### ❌ Negative Test Cases
+
+| Test Case Type | Scenario          | Test Case ID  | Title                        | Step ID | Step Action                               | Expected Result                |
+| -------------- | ----------------- | ------------- | ---------------------------- | ------- | ----------------------------------------- | ------------------------------ |
+| Negative       | Negative Quantity | TC\_CART\_004 | Enter -1 as quantity         | STP\_01 | Set quantity to -1                        | Error: “Invalid quantity”      |
+| Negative       | Remove From Empty | TC\_CART\_005 | Try removing with empty cart | STP\_01 | Open empty cart and click remove          | No action or disabled button   |
+| Negative       | Add Without Login | TC\_CART\_006 | Add item without login       | STP\_01 | Click Add to Cart without being logged in | Prompt to log in or guest cart |
+
+---
+
+## 📩 **4. Contact Us Form**
+
+### ✅ Positive Test Cases
+
+| Test Case Type | Scenario          | Test Case ID | Title                        | Step ID | Step Action                             | Expected Result                         |
+| -------------- | ----------------- | ------------ | ---------------------------- | ------- | --------------------------------------- | --------------------------------------- |
+| Functional     | Submit Valid Form | TC\_CF\_001  | Submit with valid info       | STP\_01 | Fill all fields correctly, click submit | Success message shown                   |
+| Functional     | Form Field Check  | TC\_CF\_002  | Check presence of all fields | STP\_01 | View Contact Us form                    | Name, email, message fields are visible |
+
+### ❌ Negative Test Cases
+
+| Test Case Type | Scenario      | Test Case ID | Title                      | Step ID | Step Action                           | Expected Result                 |
+| -------------- | ------------- | ------------ | -------------------------- | ------- | ------------------------------------- | ------------------------------- |
+| Negative       | Invalid Email | TC\_CF\_003  | Submit form with bad email | STP\_01 | Enter `abc@xyz` as email              | Error: “Invalid email format”   |
+| Negative       | Empty Fields  | TC\_CF\_004  | Submit form blank          | STP\_01 | Click submit without filling anything | All required field errors shown |
+
+---
+
+## 🔍 **5. Search Functionality**
+
+### ✅ Positive Test Cases
+
+| Test Case Type | Scenario     | Test Case ID | Title                    | Step ID | Step Action                    | Expected Result                   |
+| -------------- | ------------ | ------------ | ------------------------ | ------- | ------------------------------ | --------------------------------- |
+| Functional     | Valid Search | TC\_SR\_001  | Search existing item     | STP\_01 | Enter “laptop” and press enter | Related products shown            |
+| Functional     | Auto-suggest | TC\_SR\_002  | Search suggestions shown | STP\_01 | Type 3 letters in search bar   | Dropdown with suggestions appears |
+
+### ❌ Negative Test Cases
+
+| Test Case Type | Scenario        | Test Case ID | Title                         | Step ID | Step Action                     | Expected Result             |
+| -------------- | --------------- | ------------ | ----------------------------- | ------- | ------------------------------- | --------------------------- |
+| Negative       | Gibberish Input | TC\_SR\_003  | Search random text            | STP\_01 | Enter `###^^%$`                 | Message: “No results found” |
+| Negative       | Empty Search    | TC\_SR\_004  | Click search with empty input | STP\_01 | Click search with nothing typed | Show error or no action     |
+
+---
+
+Would you like these test cases exported in **Excel format**, or grouped in a **Test Case Document with sections and summary**?
