@@ -1,0 +1,69 @@
+
+## 🔍 Test Scenario: Validate Card Details in Payment Gateway
+
+### ✅ Notes:
+
+* Format assumes a web form or app UI.
+* CVV assumed to be 3 digits (common for Visa, MasterCard).
+* Expiry format: **MM/YY**
+* Tests assume frontend validation (you may add backend/API test cases separately).
+
+| Case ID | Title                                    | Step ID | Step Action                                                | Expected Result                                                        |
+| ------- | ---------------------------------------- | ------- | ---------------------------------------------------------- | ---------------------------------------------------------------------- |
+| TC001   | Validate Card Number (Valid Input)       | 1.1     | Enter a valid 16-digit Visa card number                    | Card number is accepted and no error is shown                          |
+|         |                                          | 1.2     | Click “Pay”                   															| Proceeds to next step or prompts for other fields (CVV, name, expiry)  |
+| TC002   | Validate Card Number (Invalid Format)    | 2.1     | Enter fewer than 16 digits (e.g., 1234 5678 910)           | Error message shown: "Invalid card number"                             |
+| TC003   | Validate Card Number (With Letters)      | 3.1     | Enter card number with letters (e.g., 1234 56AB 7890 1234) | Error message shown: "Card number must contain digits only"            |
+| TC004   | Validate CVV (Valid Input)               | 4.1     | Enter a 3-digit CVV (e.g., 123)                            | CVV is accepted and no error is shown                                  |
+| TC005   | Validate CVV (Too Short)                 | 5.1     | Enter a 2-digit CVV                                        | Error message shown: "Invalid CVV"                                     |
+| TC006   | Validate CVV (Non-Numeric)               | 6.1     | Enter a CVV with letters (e.g., 1A3)                       | Error message shown: "CVV must be numeric"                             |
+| TC007   | Validate Cardholder Name (Valid Input)   | 7.1     | Enter full name (e.g., John Doe)                           | Name is accepted and no error is shown                                 |
+| TC008   | Validate Cardholder Name (Empty)         | 8.1     | Leave cardholder name field empty                          | Error message shown: "Cardholder name is required"                     |
+| TC009   | Validate Cardholder Name (Special Chars) | 9.1     | Enter name with special characters (e.g., @John#Doe!)      | Error message shown: "Name contains invalid characters"                |
+| TC010   | Validate Expiry Date (Valid Input)       | 10.1    | Enter a future date (e.g., 12/26)                          | Date is accepted and no error is shown                                 |
+| TC011   | Validate Expiry Date (Past Date)         | 11.1    | Enter a past date (e.g., 05/23)                            | Error message shown: "Card expired"                                    |
+| TC012   | Validate Expiry Date (Wrong Format)      | 12.1    | Enter date in incorrect format (e.g., 2026/12 or 12-2026)  | Error message shown: "Invalid expiry date format. Use MM/YY"           |
+| TC013   | All Fields Empty                         | 13.1    | Leave all fields blank                                     | Multiple errors shown: card number, CVV, name, and expiry are required |
+| TC014   | Valid Full Payment Form                  | 14.1    | Enter valid card number, CVV, name, and expiry             | Form is successfully submitted; payment is processed                   |
+
+
+### ✅ Summary
+
+* **Card Number Boundary**: Must be exactly **16 digits** (Visa/MasterCard), and should reject anything outside that.
+* **CVV Boundary**:
+
+  * Common cards: **3-digit**
+  * AMEX (optional case): **4-digit**
+  * All others: Reject <3 or >4 digits and non-numeric input.
+## 🔍 **Boundary Value Analysis: Card Number & CVV**
+
+### 📌 **Field: Card Number**
+
+**Expected Format:** 16-digit numeric string (no letters or special chars)
+
+| Case ID | Title                              | Input Value             | Expected Result                    | Notes                             |
+| ------- | ---------------------------------- | ----------------------- | ---------------------------------- | --------------------------------- |
+| BV001   | Minimum boundary - 15 digits       | `1234 5678 9012 345`    | ❌ Invalid: "Card number too short" | 1 digit below lower limit         |
+| BV002   | Exact lower limit - 16 digits      | `1234 5678 9012 3456`   | ✅ Valid                            | Correct format                    |
+| BV003   | Just above upper limit - 17 digits | `1234 5678 9012 3456 7` | ❌ Invalid: "Card number too long"  | 1 digit above upper limit         |
+| BV004   | Empty input                        | (blank)                 | ❌ Invalid: "Card number required"  | Empty field                       |
+| BV005   | Non-numeric characters             | `1234 5678 90AB CDEF`   | ❌ Invalid: "Only numbers allowed"  | Invalid characters in card number |
+
+---
+
+### 📌 **Field: CVV**
+
+**Expected Format:** 3-digit numeric string (some cards like AMEX may use 4)
+
+| Case ID | Title                             | Input Value | Expected Result                  | Notes                           |
+| ------- | --------------------------------- | ----------- | -------------------------------- | ------------------------------- |
+| BV006   | Below lower boundary - 2 digits   | `12`        | ❌ Invalid: "CVV too short"       | Less than minimum               |
+| BV007   | Exact lower limit - 3 digits      | `123`       | ✅ Valid                          | Most common cards (Visa/Master) |
+| BV008   | Just above upper limit - 4 digits | `1234`      | ⚠️ Valid for AMEX / ❌ for others | Conditional based on card type  |
+| BV009   | Too long - 5 digits               | `12345`     | ❌ Invalid: "CVV too long"        | Beyond valid range              |
+| BV010   | Non-numeric input                 | `12A`       | ❌ Invalid: "CVV must be numeric" | Letters not allowed             |
+| BV011   | Empty CVV field                   | (blank)     | ❌ Invalid: "CVV is required"     | Required field                  |
+
+---
+
+
