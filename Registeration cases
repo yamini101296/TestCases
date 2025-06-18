@@ -1,0 +1,29 @@
+### ✅ ** Registration Page – Password & Confirm Password**
+
+**Condition**:
+
+* Password must be ≥8 characters
+* Must be alphanumeric
+* Password and Confirm Password must match
+
+#### 🔹 BVA
+
+| Test Case Type | Scenario             | Test Case ID      | Title                           | Step ID | Step Action                            | Expected Result                 |
+| -------------- | -------------------- | ----------------- | ------------------------------- | ------- | -------------------------------------- | ------------------------------- |
+| Boundary       | Password length = 7  | TC\_BVA\_PWD\_001 | Just below minimum length       | STP\_01 | Enter password as "Test123"            | Error: "Minimum 8 characters"   |
+| Boundary       | Password length = 8  | TC\_BVA\_PWD\_002 | Minimum length                  | STP\_01 | Enter password as "Test1234"           | Accepted if confirmed correctly |
+| Boundary       | Password length = 9  | TC\_BVA\_PWD\_003 | Just above minimum              | STP\_01 | Enter password as "Test12345"          | Accepted                        |
+| Boundary       | Password length = 20 | TC\_BVA\_PWD\_004 | Upper practical limit           | STP\_01 | Enter password as "Test12345678901234" | Accepted                        |
+| Boundary       | Password length = 21 | TC\_BVA\_PWD\_005 | Just above upper limit (if any) | STP\_01 | Enter very long string                 | Error or accepted per UI rule   |
+
+#### 🔹 EP Classes
+
+| Class Type | Partition                        | Example Value         | Expected Result               |
+| ---------- | -------------------------------- | --------------------- | ----------------------------- |
+| Valid      | Length 8–20, alphanumeric, match | "User1234" + same     | Password accepted             |
+| Invalid    | Length <8                        | "Test1"               | Error: too short              |
+| Invalid    | Non-alphanumeric                 | "\*\*\*\*\*\*\*\*"    | Error: not alphanumeric       |
+| Invalid    | Mismatch with confirm password   | "User1234"/"User4321" | Error: passwords do not match |
+| Invalid    | Length > max (if defined)        | 25 characters         | Error or warning              |
+
+---
