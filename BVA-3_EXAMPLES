@@ -1,60 +1,39 @@
 
-### **1. Boundary Value Analysis (BVA) – Age Validation (Valid Range: 18–60)**
+### ✅ ** BVA – Age Validation (Valid Range: 18–60)**
 
-| Test Case Type | Scenario | Test Case ID      | Title                  | Step ID | Step Action     | Expected Result           |
-| -------------- | -------- | ----------------- | ---------------------- | ------- | --------------- | ------------------------- |
-| Boundary       | Age = 17 | TC\_BVA\_AGE\_001 | Age just below minimum | STP\_01 | Enter age as 17 | Error: "Age must be ≥ 18" |
-| Boundary       | Age = 18 | TC\_BVA\_AGE\_002 | Age at minimum         | STP\_01 | Enter age as 18 | Age accepted              |
-| Boundary       | Age = 19 | TC\_BVA\_AGE\_003 | Age just above minimum | STP\_01 | Enter age as 19 | Age accepted              |
-
----
-
-### **2. BVA – CVV Validation (Must be exactly 3 digits)**
-
-| Test Case Type | Scenario  | Test Case ID      | Title                | Step ID | Step Action      | Expected Result               |
-| -------------- | --------- | ----------------- | -------------------- | ------- | ---------------- | ----------------------------- |
-| Boundary       | CVV = 99  | TC\_BVA\_CVV\_001 | Below minimum length | STP\_01 | Enter CVV as 99  | Error: "CVV must be 3 digits" |
-| Boundary       | CVV = 100 | TC\_BVA\_CVV\_002 | Minimum valid CVV    | STP\_01 | Enter CVV as 100 | CVV accepted                  |
-| Boundary       | CVV = 101 | TC\_BVA\_CVV\_003 | Above minimum valid  | STP\_01 | Enter CVV as 101 | CVV accepted                  |
+| Test Case Type | Scenario | Test Case ID      | Title              | Step ID | Step Action     | Expected Result           |
+| -------------- | -------- | ----------------- | ------------------ | ------- | --------------- | ------------------------- |
+| Boundary       | Age = 17 | TC\_BVA\_AGE\_001 | Just below minimum | STP\_01 | Enter age as 17 | Error: "Age must be ≥ 18" |
+| Boundary       | Age = 18 | TC\_BVA\_AGE\_002 | At minimum         | STP\_01 | Enter age as 18 | Age accepted              |
+| Boundary       | Age = 19 | TC\_BVA\_AGE\_003 | Just above minimum | STP\_01 | Enter age as 19 | Age accepted              |
+| Boundary       | Age = 59 | TC\_BVA\_AGE\_004 | Just below maximum | STP\_01 | Enter age as 59 | Age accepted              |
+| Boundary       | Age = 60 | TC\_BVA\_AGE\_005 | At maximum         | STP\_01 | Enter age as 60 | Age accepted              |
+| Boundary       | Age = 61 | TC\_BVA\_AGE\_006 | Just above maximum | STP\_01 | Enter age as 61 | Error: "Age must be ≤ 60" |
 
 ---
 
-### **3. BVA – University Grading System (A: 90-100, B: 80-89, ..., D: 60-69)**
+### ✅ **BVA – CVV Validation (Must be exactly 3 digits: 100–999)**
 
-| Test Case Type | Scenario   | Test Case ID      | Title                     | Step ID | Step Action       | Expected Result  |
-| -------------- | ---------- | ----------------- | ------------------------- | ------- | ----------------- | ---------------- |
-| Boundary       | Score = 89 | TC\_BVA\_GRD\_001 | Upper boundary of Grade B | STP\_01 | Enter score as 89 | Grade B assigned |
-| Boundary       | Score = 90 | TC\_BVA\_GRD\_002 | Lower boundary of Grade A | STP\_01 | Enter score as 90 | Grade A assigned |
-| Boundary       | Score = 91 | TC\_BVA\_GRD\_003 | Above boundary of Grade A | STP\_01 | Enter score as 91 | Grade A assigned |
-
----
-
-
-## ✅ System Rule Summary:
-
-* **Only members** get discounts.
-* On **every 10th service** → **10% discount**
-* On **every 20th service** → **20% discount**
+| Test Case Type | Scenario   | Test Case ID      | Title              | Step ID | Step Action       | Expected Result                    |
+| -------------- | ---------- | ----------------- | ------------------ | ------- | ----------------- | ---------------------------------- |
+| Boundary       | CVV = 99   | TC\_BVA\_CVV\_001 | Below minimum      | STP\_01 | Enter CVV as 99   | Error: "CVV must be 3 digits"      |
+| Boundary       | CVV = 100  | TC\_BVA\_CVV\_002 | Minimum valid      | STP\_01 | Enter CVV as 100  | CVV accepted                       |
+| Boundary       | CVV = 101  | TC\_BVA\_CVV\_003 | Just above minimum | STP\_01 | Enter CVV as 101  | CVV accepted                       |
+| Boundary       | CVV = 998  | TC\_BVA\_CVV\_004 | Just below maximum | STP\_01 | Enter CVV as 998  | CVV accepted                       |
+| Boundary       | CVV = 999  | TC\_BVA\_CVV\_005 | Maximum valid      | STP\_01 | Enter CVV as 999  | CVV accepted                       |
+| Boundary       | CVV = 1000 | TC\_BVA\_CVV\_006 | Above maximum      | STP\_01 | Enter CVV as 1000 | Error: "CVV must be 3 digits only" |
 
 ---
 
-### 🔹 **3-Point BVA for 10% Discount (at 10th service)**
+### ✅ ** BVA – University Grading System (A: 90–100, B: 80–89, C: 70–79, D: 60–69)**
 
-| Test Case Type | Scenario            | Test Case ID     | Title                       | Step ID | Step Action             | Expected Result      |
-| -------------- | ------------------- | ---------------- | --------------------------- | ------- | ----------------------- | -------------------- |
-| Boundary       | Below Boundary (9)  | TC\_BVA\_10\_001 | 9th service - No discount   | STP\_01 | Member logs 9 services  | No discount applied  |
-| Boundary       | On Boundary (10)    | TC\_BVA\_10\_002 | 10th service - 10% discount | STP\_01 | Member logs 10 services | 10% discount applied |
-| Boundary       | Above Boundary (11) | TC\_BVA\_10\_003 | 11th service - No discount  | STP\_01 | Member logs 11 services | No discount applied  |
-
----
-
-### 🔹 **3-Point BVA for 20% Discount (at 20th service)**
-
-| Test Case Type | Scenario            | Test Case ID     | Title                       | Step ID | Step Action             | Expected Result      |
-| -------------- | ------------------- | ---------------- | --------------------------- | ------- | ----------------------- | -------------------- |
-| Boundary       | Below Boundary (19) | TC\_BVA\_20\_001 | 19th service - No discount  | STP\_01 | Member logs 19 services | No discount applied  |
-| Boundary       | On Boundary (20)    | TC\_BVA\_20\_002 | 20th service - 20% discount | STP\_01 | Member logs 20 services | 20% discount applied |
-| Boundary       | Above Boundary (21) | TC\_BVA\_20\_003 | 21st service - No discount  | STP\_01 | Member logs 21 services | No discount applied  |
+| Test Case Type | Scenario    | Test Case ID      | Title                     | Step ID | Step Action        | Expected Result                   |
+| -------------- | ----------- | ----------------- | ------------------------- | ------- | ------------------ | --------------------------------- |
+| Boundary       | Score = 59  | TC\_BVA\_GRD\_001 | Below Grade D             | STP\_01 | Enter score as 59  | Grade F or Fail assigned          |
+| Boundary       | Score = 60  | TC\_BVA\_GRD\_002 | Lower boundary of Grade D | STP\_01 | Enter score as 60  | Grade D assigned                  |
+| Boundary       | Score = 61  | TC\_BVA\_GRD\_003 | Just above lower Grade D  | STP\_01 | Enter score as 61  | Grade D assigned                  |
+| Boundary       | Score = 99  | TC\_BVA\_GRD\_004 | Just below max            | STP\_01 | Enter score as 99  | Grade A assigned                  |
+| Boundary       | Score = 100 | TC\_BVA\_GRD\_005 | Upper boundary of Grade A | STP\_01 | Enter score as 100 | Grade A assigned                  |
+| Boundary       | Score = 101 | TC\_BVA\_GRD\_006 | Above Grade A             | STP\_01 | Enter score as 101 | Error: "Score out of valid range" |
 
 ---
-
