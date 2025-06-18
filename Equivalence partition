@@ -1,0 +1,144 @@
+## 🔹 EP with 1 Input
+
+### Example 1: **Email Address Field**
+
+**Condition**: Email must be in a valid format (e.g., `user@example.com`)
+* **Valid**: Contains `@` and a domain
+* **Invalid**: Missing `@`, domain, or blank input
+
+| Partition Type | Input Value                                 | Class Description        | Expected Result                |
+| -------------- | ------------------------------------------- | ------------------------ | ------------------------------ |
+| Valid          | [user@example.com](mailto:user@example.com) | Properly formatted email | Email accepted                 |
+| Invalid        | userexample.com                             | Missing “@” symbol       | Error: "Invalid email address" |
+| Invalid        | (blank)                                     | Empty email field        | Error: "Email is required"     |
+
+---
+
+### Example 2: **Age Input for Driving License**
+
+**Condition**: Minimum age required to apply is **18 years**
+* **Valid**: Age ≥ 18
+* **Invalid**: Age < 18 or negative age
+
+| Partition Type | Input Value | Class Description  | Expected Result              |
+| -------------- | ----------- | ------------------ | ---------------------------- |
+| Valid          | 18          | Legal age to apply | Application allowed          |
+| Invalid        | 16          | Below legal age    | Error: "Minimum age is 18"   |
+| Invalid        | -5          | Negative age       | Error: "Invalid age entered" |
+
+---
+
+### Example 3: **Password Length**
+
+**Condition**: Password must be **minimum 8 characters** long
+* **Valid**: Length ≥ 8
+* **Invalid**: Length < 8 or blank
+
+| Partition Type | Input Value | Class Description     | Expected Result             |
+| -------------- | ----------- | --------------------- | --------------------------- |
+| Valid          | 10 chars    | Meets min length of 8 | Password accepted           |
+| Invalid        | 5 chars     | Too short             | Error: "Password too short" |
+| Invalid        | 0 chars     | Empty input           | Error: "Password required"  |
+
+---
+
+## 🔹 EP with 2 Inputs
+
+### Example 1: **Username + Password Login**
+
+**Condition**: Login allowed only when both username and password are correct
+* **Valid**: Correct username & password
+* **Invalid**: One or both incorrect; blank inputs
+
+| Partition Type | Inputs                        | Class Description       | Expected Result            |
+| -------------- | ----------------------------- | ----------------------- | -------------------------- |
+| Valid          | Correct username + password   | All correct credentials | Login successful           |
+| Invalid Combo  | Correct username + wrong pass | Incorrect password      | Error: "Invalid password"  |
+| Invalid Input  | Blank username + password     | Missing required input  | Error: "Username required" |
+
+---
+
+### Example 2: **PIN + ATM Card Status**
+
+**Condition**: Transaction allowed only if card is active and PIN is correct
+* **Valid**: Active card + correct PIN
+* **Invalid**: Incorrect PIN, blocked card, or both
+
+| Partition Type | Inputs                  | Class Description  | Expected Result       |
+| -------------- | ----------------------- | ------------------ | --------------------- |
+| Valid          | 4-digit PIN + Active    | Valid PIN and card | Transaction proceeds  |
+| Invalid Combo  | Wrong PIN + Active card | Incorrect PIN      | Error: "Invalid PIN"  |
+| Invalid Input  | Any PIN + Blocked card  | Blocked card       | Error: "Card blocked" |
+
+---
+
+### Example 3: **Room Temp + Fan Switch**
+
+***Condition**: Fan works only if **switched ON** and temperature is high (>30°C)
+* **Valid**: Temp > 30 and switch ON
+* **Invalid**: Low temperature or switch OFF
+
+
+| Partition Type | Inputs          | Class Description         | Expected Result              |
+| -------------- | --------------- | ------------------------- | ---------------------------- |
+| Valid          | Temp > 30 + On  | High temp + fan switch on | Fan running                  |
+| Invalid Combo  | Temp < 20 + Off | No need + switch off      | Fan off                      |
+| Invalid Input  | Temp = -10 + On | Invalid temperature input | Error: "Invalid temperature" |
+
+---
+
+## 🔹 EP with 3 Inputs
+
+### Example 1: **Online Course Registration**
+
+**Inputs**: Student ID, Course Code, Payment Status
+
+**Condition**: Registration is successful only if ID is valid, course exists, and payment is made
+* **Valid**: All three inputs valid
+* **Invalid**: Any one missing or unpaid
+
+| Partition Type | Inputs                           | Class Description          | Expected Result              |
+| -------------- | -------------------------------- | -------------------------- | ---------------------------- |
+| Valid          | Valid ID + Valid Course + Paid   | All valid and payment done | Registration successful      |
+| Invalid Combo  | Valid ID + Valid Course + Unpaid | Payment pending            | Error: "Payment required"    |
+| Invalid Input  | Blank ID + Course + Paid         | Missing student ID         | Error: "Student ID required" |
+
+---
+
+### Example 2: **Train Ticket Booking**
+
+**Inputs**: Source, Destination, Date
+
+**Condition**:
+* Source ≠ Destination
+* Date should not be in the past
+* Route should be valid
+* **Valid**: All conditions met
+* **Invalid**: Past date, same source/destination
+
+
+
+| Partition Type | Inputs                       | Class Description           | Expected Result              |
+| -------------- | ---------------------------- | --------------------------- | ---------------------------- |
+| Valid          | Mumbai + Delhi + 15-Jun      | Valid route and future date | Ticket available             |
+| Invalid Combo  | Mumbai + Mumbai + 15-Jun     | Source and destination same | Error: "Invalid route"       |
+| Invalid Input  | Mumbai + Delhi + 12-Feb-2021 | Past date                   | Error: "Date must be future" |
+
+---
+
+### Example 3: **Water Quality Monitoring System**
+
+**Inputs**: pH level, Turbidity, Temperature
+
+**Condition**:
+* Safe if pH: 6.5–8.5, turbidity < 5 NTU, temperature < 35°C
+* Unsafe otherwise
+* **Valid**: All parameters in safe range
+* **Invalid**: Any one or more outside safe range, or missing
+
+| Partition Type | Inputs                        | Class Description             | Expected Result        |
+| -------------- | ----------------------------- | ----------------------------- | ---------------------- |
+| Valid          | pH 7 + Turb 2 NTU + Temp 25°C | Safe water conditions         | Status: "Water Safe"   |
+| Invalid Combo  | pH 3 + Turb 5 NTU + Temp 60°C | Unsafe in multiple parameters | Status: "Unsafe Water" |
+| Invalid Input  | pH = null + other valid       | Missing input                 | Error: "Sensor Error"  |
+
